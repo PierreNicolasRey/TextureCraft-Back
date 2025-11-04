@@ -1,4 +1,4 @@
-package fr.texturecraft.dto;
+package fr.texturecraft.exception;
 
 public class FormatErreurInattendueException extends RuntimeException {
   public FormatErreurInattendueException(String message) {

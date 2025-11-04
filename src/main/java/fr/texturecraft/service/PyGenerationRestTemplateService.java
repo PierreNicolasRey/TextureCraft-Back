@@ -1,7 +1,7 @@
 package fr.texturecraft.service;
 
 import fr.texturecraft.dto.ErrorDetails;
-import fr.texturecraft.dto.FormatErreurInattendueException;
+import fr.texturecraft.exception.FormatErreurInattendueException;
 import fr.texturecraft.dto.PromptRequest;
 import fr.texturecraft.dto.PromptResponse;
 import fr.texturecraft.exception.CommunicationAPIPythonException;
