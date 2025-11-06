@@ -4,7 +4,9 @@ import fr.texturecraft.dto.GenerationFormDTO;
 import fr.texturecraft.mapper.GenerationFormMapper;
 import fr.texturecraft.model.GenerationForm;
 import fr.texturecraft.service.GenererTextureService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,12 @@ public class GenererTextureController {
   public ResponseEntity<byte[]> genererTexture(@RequestBody GenerationFormDTO generationFormDTO) {
     GenerationForm generationForm = generationFormMapper.mapperGenerationFormDTOToGenerationForm(generationFormDTO);
 
-    return new ResponseEntity<>(this.genererTextureService.genererTexture(generationForm), HttpStatus.OK);
+    byte[] imageBytes = this.genererTextureService.genererTexture(generationForm);
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.IMAGE_PNG);
+    headers.setContentLength(imageBytes.length);
+
+    return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
   }
 }
