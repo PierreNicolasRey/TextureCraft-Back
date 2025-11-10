@@ -43,7 +43,7 @@ class PyGenerationRestTemplateServiceTest {
   @Test
   void genererTextureSucces() {
     // GIVEN
-    PromptRequest promptRequest = new PromptRequest("a prompt", "final", "", "");
+    PromptRequest promptRequest = new PromptRequest("a prompt", "16x16", "final", "", "");
 
     PromptResponse promptResponseAttendue = new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0","final");
 
@@ -86,7 +86,7 @@ class PyGenerationRestTemplateServiceTest {
     Assertions.assertThrows(ValidationRequeteAPIPythonException.class, () -> {
       // WHEN
       pyGenerationRestTemplateService.genererTexture(
-          new PromptRequest("a prompt", "modele_inconnu", "", ""));
+          new PromptRequest("a prompt", "16x16", "modele_inconnu", "", ""));
     });
   }
 
@@ -120,7 +120,7 @@ class PyGenerationRestTemplateServiceTest {
         Assertions.assertThrows(ErreurInterneAPIPythonException.class, () -> {
           // WHEN
           pyGenerationRestTemplateService.genererTexture(
-            new PromptRequest("a prompt", "final", "", ""));
+            new PromptRequest("a prompt", "16x16", "final", "", ""));
       });
     assertEquals(thrownException.getMessage(), erreurInterneAPIPythonExceptionMessage);
   }
@@ -139,7 +139,7 @@ class PyGenerationRestTemplateServiceTest {
     Assertions.assertThrows(FormatErreurInattendueException.class, () -> {
       // WHEN
       pyGenerationRestTemplateService.genererTexture(
-          new PromptRequest("a prompt", "final", "", ""));
+          new PromptRequest("a prompt", "16x16", "final", "", ""));
     });
   }
 
@@ -157,7 +157,7 @@ class PyGenerationRestTemplateServiceTest {
     Assertions.assertThrows(CommunicationAPIPythonException.class, () -> {
       // WHEN
       pyGenerationRestTemplateService.genererTexture(
-          new PromptRequest("a prompt", "final", "", ""));
+          new PromptRequest("a prompt", "16x16", "final", "", ""));
     });
   }
 }

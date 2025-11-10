@@ -1,109 +1,69 @@
 package fr.texturecraft.model;
 
 import fr.texturecraft.enums.ModelEnum;
+import io.micrometer.common.util.StringUtils;
 
-public class GenerationForm {
-  private ModelEnum modelEnum;
-  private String resolution;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-  // Tags obligatoires
-  private String typeObjet;
-  private String materiau;
-  private String nomType;
-  private String couleur;
-  private String description;
+import static fr.texturecraft.constantes.PromptConstantes.COULEUR;
+import static fr.texturecraft.constantes.PromptConstantes.DESCRIPTION;
+import static fr.texturecraft.constantes.PromptConstantes.ESPACE;
+import static fr.texturecraft.constantes.PromptConstantes.FOND;
+import static fr.texturecraft.constantes.PromptConstantes.MATERIAU;
+import static fr.texturecraft.constantes.PromptConstantes.MINECRAFT;
+import static fr.texturecraft.constantes.PromptConstantes.NOM_TYPE;
+import static fr.texturecraft.constantes.PromptConstantes.OPACITE;
+import static fr.texturecraft.constantes.PromptConstantes.STYLE_PIXEL_ART;
+import static fr.texturecraft.constantes.PromptConstantes.SYMETRIE;
+import static fr.texturecraft.constantes.PromptConstantes.TYPE_BLOCK;
+import static fr.texturecraft.constantes.PromptConstantes.TYPE_ITEM;
+import static fr.texturecraft.constantes.PromptConstantes.VIRGULE;
+import static fr.texturecraft.constantes.PromptConstantes.VUE;
 
-  // Tags optionnels
-  private String fond;
-  private String opacite;
-  private String vue;
-  private String symetrie;
+public record GenerationForm(ModelEnum modelEnum,
+                             String resolution,
+                             String typeObjet,
+                             String materiau,
+                             String nomType,
+                             String couleur,
+                             String description,
+                             String fond,
+                             String opacite,
+                             String vue,
+                             String symetrie) {
 
-  public ModelEnum getModelEnum() {
-    return modelEnum;
+  public String construirePromptSelonGenerationForm() {
+    StringBuilder prompt = new StringBuilder(MINECRAFT);
+    prompt.append(ESPACE);
+
+    // Ajout des tags obligatoires
+    prompt.append(TYPE_BLOCK.contains(this.typeObjet()) ? TYPE_BLOCK : TYPE_ITEM);
+    prompt.append(MATERIAU).append(this.materiau()).append(VIRGULE);
+    prompt.append(NOM_TYPE).append(this.nomType()).append(VIRGULE);
+    prompt.append(COULEUR).append(this.couleur()).append(VIRGULE);
+    prompt.append(DESCRIPTION).append(this.description()).append(VIRGULE);
+
+    construirePromptPourTagsOptionnels(prompt);
+
+    prompt.append(STYLE_PIXEL_ART);
+
+    return prompt.toString();
   }
 
-  public void setModelEnum(ModelEnum modelEnum) {
-    this.modelEnum = modelEnum;
-  }
+  private void construirePromptPourTagsOptionnels(StringBuilder prompt) {
+    Map<String, String> tagsOptionnels = new LinkedHashMap<>();
 
-  public String getResolution() {
-    return resolution;
-  }
+    // Maintient de l'ordre des tags optionnels
+    tagsOptionnels.put(FOND, this.fond());
+    tagsOptionnels.put(OPACITE, this.opacite());
+    tagsOptionnels.put(VUE, this.vue());
+    tagsOptionnels.put(SYMETRIE, this.symetrie());
 
-  public void setResolution(String resolution) {
-    this.resolution = resolution;
-  }
-
-  public String getTypeObjet() {
-    return typeObjet;
-  }
-
-  public void setTypeObjet(String typeObjet) {
-    this.typeObjet = typeObjet;
-  }
-
-  public String getMateriau() {
-    return materiau;
-  }
-
-  public void setMateriau(String materiau) {
-    this.materiau = materiau;
-  }
-
-  public String getNomType() {
-    return nomType;
-  }
-
-  public void setNomType(String nomType) {
-    this.nomType = nomType;
-  }
-
-  public String getCouleur() {
-    return couleur;
-  }
-
-  public void setCouleur(String couleur) {
-    this.couleur = couleur;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getFond() {
-    return fond;
-  }
-
-  public void setFond(String fond) {
-    this.fond = fond;
-  }
-
-  public String getOpacite() {
-    return opacite;
-  }
-
-  public void setOpacite(String opacite) {
-    this.opacite = opacite;
-  }
-
-  public String getVue() {
-    return vue;
-  }
-
-  public void setVue(String vue) {
-    this.vue = vue;
-  }
-
-  public String getSymetrie() {
-    return symetrie;
-  }
-
-  public void setSymetrie(String symetrie) {
-    this.symetrie = symetrie;
+    tagsOptionnels.entrySet().stream()
+        .filter(tag ->
+            StringUtils.isNotEmpty(tag.getValue()))
+        .forEach(tag ->
+            prompt.append(tag.getKey()).append(tag.getValue()).append(VIRGULE));
   }
 }

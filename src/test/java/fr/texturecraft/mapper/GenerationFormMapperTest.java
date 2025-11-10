@@ -27,19 +27,20 @@ class GenerationFormMapperTest {
 
     // THEN
     Assertions.assertAll(() -> {
-      assertEquals(ModelEnum.FINAL, model.getModelEnum());
+      assertEquals(ModelEnum.FINAL, model.modelEnum());
+      assertEquals(dto.resolution(), model.resolution());
       // Tags obligatoires
-      assertEquals(dto.typeObjet(), model.getTypeObjet());
-      assertEquals(dto.materiau(), model.getMateriau());
-      assertEquals(dto.nomType(), model.getNomType());
-      assertEquals(dto.couleur(), model.getCouleur());
-      assertEquals(dto.description(), model.getDescription());
+      assertEquals(dto.typeObjet(), model.typeObjet());
+      assertEquals(dto.materiau(), model.materiau());
+      assertEquals(dto.nomType(), model.nomType());
+      assertEquals(dto.couleur(), model.couleur());
+      assertEquals(dto.description(), model.description());
 
       // Tags optionnels vides
-      assertEquals("", model.getFond());
-      assertEquals("", model.getOpacite());
-      assertEquals("", model.getVue());
-      assertEquals("", model.getSymetrie());
+      assertEquals("", model.fond());
+      assertEquals("", model.opacite());
+      assertEquals("", model.vue());
+      assertEquals("", model.symetrie());
     });
   }
 
@@ -55,19 +56,20 @@ class GenerationFormMapperTest {
 
     // THEN
     Assertions.assertAll(() -> {
-      assertEquals(ModelEnum.FINAL, model.getModelEnum());
+      assertEquals(ModelEnum.FINAL, model.modelEnum());
+      assertEquals(dto.resolution(), model.resolution());
       // Tags obligatoires
-      assertEquals(dto.typeObjet(), model.getTypeObjet());
-      assertEquals(dto.materiau(), model.getMateriau());
-      assertEquals(dto.nomType(), model.getNomType());
-      assertEquals(dto.couleur(), model.getCouleur());
-      assertEquals(dto.description(), model.getDescription());
+      assertEquals(dto.typeObjet(), model.typeObjet());
+      assertEquals(dto.materiau(), model.materiau());
+      assertEquals(dto.nomType(), model.nomType());
+      assertEquals(dto.couleur(), model.couleur());
+      assertEquals(dto.description(), model.description());
 
       // Tags optionnels vides
-      assertEquals(dto.fond(), model.getFond());
-      assertEquals(dto.opacite(), model.getOpacite());
-      assertEquals(dto.vue(), model.getVue());
-      assertEquals(dto.symetrie(), model.getSymetrie());
+      assertEquals(dto.fond(), model.fond());
+      assertEquals(dto.opacite(), model.opacite());
+      assertEquals(dto.vue(), model.vue());
+      assertEquals(dto.symetrie(), model.symetrie());
     });
   }
 

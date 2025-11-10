@@ -54,6 +54,7 @@ class GenererTextureServiceImplTest {
       PromptRequest capturedRequest = promptRequestCaptor.getValue();
 
       assertEquals(promptResponseAttendue.model(), capturedRequest.model());
+      assertEquals(generationForm.resolution(), capturedRequest.resolution());
       assertEquals(promptAttendu, capturedRequest.prompt());
     });
   }
@@ -83,6 +84,7 @@ class GenererTextureServiceImplTest {
       PromptRequest capturedRequest = promptRequestCaptor.getValue();
 
       assertEquals(promptResponseAttendue.model(), capturedRequest.model());
+      assertEquals(generationForm.resolution(), capturedRequest.resolution());
       assertEquals(promptAttendu, capturedRequest.prompt());
     });
   }

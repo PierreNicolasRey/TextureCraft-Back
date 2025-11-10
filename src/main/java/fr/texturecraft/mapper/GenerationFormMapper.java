@@ -8,27 +8,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class GenerationFormMapper {
   public GenerationForm mapperGenerationFormDTOToGenerationForm(GenerationFormDTO dto) {
-    GenerationForm generationForm = new GenerationForm();
-    generationForm.setModelEnum(ModelEnum.valueOf(dto.model().toUpperCase()));
-
-    mapperTagsObligatoiresDTOToModel(dto, generationForm);
-    mapperTagsOptionnelsDTOToModel(dto, generationForm);
-
-    return generationForm;
-  }
-
-  private void mapperTagsObligatoiresDTOToModel(GenerationFormDTO dto, GenerationForm model) {
-    model.setTypeObjet(dto.typeObjet());
-    model.setMateriau(dto.materiau());
-    model.setNomType(dto.nomType());
-    model.setCouleur(dto.couleur());
-    model.setDescription(dto.description());
-  }
-
-  private void mapperTagsOptionnelsDTOToModel(GenerationFormDTO dto, GenerationForm model) {
-      model.setFond(dto.fond());
-      model.setOpacite(dto.opacite());
-      model.setVue(dto.vue());
-      model.setSymetrie(dto.symetrie());
+    return new GenerationForm(
+        ModelEnum.valueOf(dto.model().toUpperCase()),
+        dto.resolution(),
+        dto.typeObjet(),
+        dto.materiau(),
+        dto.nomType(),
+        dto.couleur(),
+        dto.description(),
+        dto.fond(),
+        dto.opacite(),
+        dto.vue(),
+        dto.symetrie()
+    );
   }
 }
