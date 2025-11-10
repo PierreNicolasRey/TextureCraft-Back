@@ -45,7 +45,8 @@ class PyGenerationRestTemplateServiceTest {
     // GIVEN
     PromptRequest promptRequest = new PromptRequest("a prompt", "16x16", "final", "", "");
 
-    PromptResponse promptResponseAttendue = new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0","final");
+    PromptResponse promptResponseAttendue = new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0",
+        "aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0","final");
 
     ResponseEntity<PromptResponse> response = new ResponseEntity<>(promptResponseAttendue, HttpStatus.OK);
 
@@ -68,7 +69,8 @@ class PyGenerationRestTemplateServiceTest {
 
       assertNotNull(promptResponseObtenue);
       assertEquals(promptResponseAttendue.model(), promptResponseObtenue.model());
-      assertEquals(promptResponseAttendue.imageBase64(), promptResponseObtenue.imageBase64());
+      assertEquals(promptResponseAttendue.imageBase64Cible(), promptResponseObtenue.imageBase64Cible());
+      assertEquals(promptResponseAttendue.imageBase64Affichage(), promptResponseObtenue.imageBase64Affichage());
     });
   }
 

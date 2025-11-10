@@ -1,6 +1,7 @@
 package fr.texturecraft.controller;
 
 import fr.texturecraft.dto.GenerationFormDTO;
+import fr.texturecraft.dto.GenerationResponseDTO;
 import fr.texturecraft.mapper.GenerationFormMapper;
 import fr.texturecraft.model.GenerationForm;
 import fr.texturecraft.service.GenererTextureService;
@@ -11,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import static fr.texturecraft.GenerationFormTestUtils.creerGenerationForm;
@@ -46,15 +46,15 @@ class GenererTextureControllerTest {
   @Test
   void verifierAppelQuandGenererTextureTest() {
     // GIVEN
-    byte[] bytes = new byte[2];
+    GenerationResponseDTO generationResponseDTO = new GenerationResponseDTO(new byte[2], new byte[4]);
 
     when(generationFormMapper.mapperGenerationFormDTOToGenerationForm(generationFormDTO))
         .thenReturn(generationForm);
     when(genererTextureService.genererTexture(generationForm))
-        .thenReturn(bytes);
+        .thenReturn(generationResponseDTO);
 
     // WHEN
-    ResponseEntity<byte[]> response = genererTextureController.genererTexture(generationFormDTO);
+    ResponseEntity<GenerationResponseDTO> response = genererTextureController.genererTexture(generationFormDTO);
 
     // THEN
     Assertions.assertAll(() -> {
@@ -63,9 +63,7 @@ class GenererTextureControllerTest {
       verify(genererTextureService, times(1))
           .genererTexture(generationForm);
       assertEquals(HttpStatus.OK, response.getStatusCode());
-      assertEquals(bytes, response.getBody());
-      assertEquals(MediaType.IMAGE_PNG, response.getHeaders().getContentType());
-      assertEquals(bytes.length, response.getHeaders().getContentLength());
+      assertEquals(generationResponseDTO, response.getBody());
     });
   }
 

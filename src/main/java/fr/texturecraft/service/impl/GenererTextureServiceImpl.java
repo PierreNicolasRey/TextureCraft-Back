@@ -1,6 +1,7 @@
 package fr.texturecraft.service.impl;
 
 import fr.texturecraft.api.GenerationApiPort;
+import fr.texturecraft.dto.GenerationResponseDTO;
 import fr.texturecraft.dto.PromptRequest;
 import fr.texturecraft.dto.PromptResponse;
 import fr.texturecraft.enums.ModelEnum;
@@ -19,11 +20,13 @@ public class GenererTextureServiceImpl implements GenererTextureService {
   }
 
   @Override
-  public byte[] genererTexture(GenerationForm generationForm) {
+  public GenerationResponseDTO genererTexture(GenerationForm generationForm) {
     PromptResponse promptResponse =
         generationApiPort.genererTexture(construirePromptRequest(generationForm));
 
-    return convertirImageBase64ToTableauBytes(promptResponse.imageBase64());
+    return new GenerationResponseDTO(
+        convertirImageBase64ToTableauBytes(promptResponse.imageBase64Cible()),
+        convertirImageBase64ToTableauBytes(promptResponse.imageBase64Affichage()));
   }
 
   private PromptRequest construirePromptRequest(GenerationForm generationForm) {

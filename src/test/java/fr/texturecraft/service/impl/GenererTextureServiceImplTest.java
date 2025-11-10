@@ -39,7 +39,8 @@ class GenererTextureServiceImplTest {
         false,false);
 
     PromptResponse promptResponseAttendue =
-        new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0","final");
+        new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0",
+            "aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0", "final");
 
     when(generationApiPort.genererTexture(any(PromptRequest.class)))
         .thenReturn(promptResponseAttendue);
@@ -63,13 +64,15 @@ class GenererTextureServiceImplTest {
   void genererTextureAvecTagsOptionnelsTest() {
     // GIVEN
     String promptAttendu = "minecraft block : material : wood, type : nom_texture, color : brown, " +
-        "features : une description, background : transparent, opacity : semi-transparent, view : top, symmetry : radial, style : pixel art";
+        "features : une description, background : transparent, opacity : semi-transparent, view : top, " +
+        "symmetry : radial, style : pixel art";
 
     GenerationForm generationForm = creerGenerationForm("block", true, true,
         true,true);
 
     PromptResponse promptResponseAttendue =
-        new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0", "final");
+        new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0",
+            "aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0", "final");
 
     when(generationApiPort.genererTexture(any(PromptRequest.class)))
         .thenReturn(promptResponseAttendue);
