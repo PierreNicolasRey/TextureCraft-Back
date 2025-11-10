@@ -43,13 +43,9 @@ class PyGenerationRestTemplateServiceTest {
   @Test
   void genererTextureSucces() {
     // GIVEN
-    PromptRequest promptRequest = new PromptRequest();
-    promptRequest.setPrompt("a prompt");
-    promptRequest.setModel("final");
+    PromptRequest promptRequest = new PromptRequest("a prompt", "final", "", "");
 
-    PromptResponse promptResponseAttendue = new PromptResponse();
-    promptResponseAttendue.setModel("final");
-    promptResponseAttendue.setImageBase64("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0");
+    PromptResponse promptResponseAttendue = new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0","final");
 
     ResponseEntity<PromptResponse> response = new ResponseEntity<>(promptResponseAttendue, HttpStatus.OK);
 
@@ -71,8 +67,8 @@ class PyGenerationRestTemplateServiceTest {
               eq(PromptResponse.class));
 
       assertNotNull(promptResponseObtenue);
-      assertEquals(promptResponseAttendue.getModel(), promptResponseObtenue.getModel());
-      assertEquals(promptResponseAttendue.getImageBase64(), promptResponseObtenue.getImageBase64());
+      assertEquals(promptResponseAttendue.model(), promptResponseObtenue.model());
+      assertEquals(promptResponseAttendue.imageBase64(), promptResponseObtenue.imageBase64());
     });
   }
 
@@ -89,21 +85,19 @@ class PyGenerationRestTemplateServiceTest {
     // THEN
     Assertions.assertThrows(ValidationRequeteAPIPythonException.class, () -> {
       // WHEN
-      pyGenerationRestTemplateService.genererTexture(new PromptRequest());
+      pyGenerationRestTemplateService.genererTexture(
+          new PromptRequest("a prompt", "modele_inconnu", "", ""));
     });
   }
 
   @Test
   void genererTextureErreurInterneAPIPythonExceptionTest() throws JsonProcessingException {
     // GIVEN
-    ErrorDetails errorDetails = new ErrorDetails();
-    errorDetails.setCode(500);
-    errorDetails.setMessage("Erreur serveur");
-    errorDetails.setStatus("error");
+    ErrorDetails errorDetails = new ErrorDetails("error", "Erreur serveur", 500);
 
     String erreurInterneAPIPythonExceptionMessage = "Erreur interne de l'API Python : \n"
-        + "Code : " + errorDetails.getCode() + " \n"
-        + "Message : " + errorDetails.getMessage();
+        + "Code : " + errorDetails.code() + " \n"
+        + "Message : " + errorDetails.message();
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -122,10 +116,12 @@ class PyGenerationRestTemplateServiceTest {
         .thenThrow(mockException);
 
     // THEN
-    ErreurInterneAPIPythonException thrownException = Assertions.assertThrows(ErreurInterneAPIPythonException.class, () -> {
-      // WHEN
-      pyGenerationRestTemplateService.genererTexture(new PromptRequest());
-    });
+    ErreurInterneAPIPythonException thrownException =
+        Assertions.assertThrows(ErreurInterneAPIPythonException.class, () -> {
+          // WHEN
+          pyGenerationRestTemplateService.genererTexture(
+            new PromptRequest("a prompt", "final", "", ""));
+      });
     assertEquals(thrownException.getMessage(), erreurInterneAPIPythonExceptionMessage);
   }
 
@@ -142,7 +138,8 @@ class PyGenerationRestTemplateServiceTest {
     // THEN
     Assertions.assertThrows(FormatErreurInattendueException.class, () -> {
       // WHEN
-      pyGenerationRestTemplateService.genererTexture(new PromptRequest());
+      pyGenerationRestTemplateService.genererTexture(
+          new PromptRequest("a prompt", "final", "", ""));
     });
   }
 
@@ -159,7 +156,8 @@ class PyGenerationRestTemplateServiceTest {
     // THEN
     Assertions.assertThrows(CommunicationAPIPythonException.class, () -> {
       // WHEN
-      pyGenerationRestTemplateService.genererTexture(new PromptRequest());
+      pyGenerationRestTemplateService.genererTexture(
+          new PromptRequest("a prompt", "final", "", ""));
     });
   }
 }

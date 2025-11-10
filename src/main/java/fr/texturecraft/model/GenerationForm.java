@@ -4,6 +4,7 @@ import fr.texturecraft.enums.ModelEnum;
 
 public class GenerationForm {
   private ModelEnum modelEnum;
+  private String resolution;
 
   // Tags obligatoires
   private String typeObjet;
@@ -24,6 +25,14 @@ public class GenerationForm {
 
   public void setModelEnum(ModelEnum modelEnum) {
     this.modelEnum = modelEnum;
+  }
+
+  public String getResolution() {
+    return resolution;
+  }
+
+  public void setResolution(String resolution) {
+    this.resolution = resolution;
   }
 
   public String getTypeObjet() {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class GenerationFormMapper {
   public GenerationForm mapperGenerationFormDTOToGenerationForm(GenerationFormDTO dto) {
     GenerationForm generationForm = new GenerationForm();
-    generationForm.setModelEnum(ModelEnum.valueOf(dto.getModel().toUpperCase()));
+    generationForm.setModelEnum(ModelEnum.valueOf(dto.model().toUpperCase()));
 
     mapperTagsObligatoiresDTOToModel(dto, generationForm);
     mapperTagsOptionnelsDTOToModel(dto, generationForm);
@@ -18,17 +18,17 @@ public class GenerationFormMapper {
   }
 
   private void mapperTagsObligatoiresDTOToModel(GenerationFormDTO dto, GenerationForm model) {
-    model.setTypeObjet(dto.getTypeObjet());
-    model.setMateriau(dto.getMateriau());
-    model.setNomType(dto.getNomType());
-    model.setCouleur(dto.getCouleur());
-    model.setDescription(dto.getDescription());
+    model.setTypeObjet(dto.typeObjet());
+    model.setMateriau(dto.materiau());
+    model.setNomType(dto.nomType());
+    model.setCouleur(dto.couleur());
+    model.setDescription(dto.description());
   }
 
   private void mapperTagsOptionnelsDTOToModel(GenerationFormDTO dto, GenerationForm model) {
-      model.setFond(dto.getFond());
-      model.setOpacite(dto.getOpacite());
-      model.setVue(dto.getVue());
-      model.setSymetrie(dto.getSymetrie());
+      model.setFond(dto.fond());
+      model.setOpacite(dto.opacite());
+      model.setVue(dto.vue());
+      model.setSymetrie(dto.symetrie());
   }
 }

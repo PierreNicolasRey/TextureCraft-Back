@@ -41,17 +41,15 @@ public class GenererTextureServiceImpl implements GenererTextureService {
     PromptResponse promptResponse =
         generationApiPort.genererTexture(construirePromptRequest(generationForm));
 
-    return convertirImageBase64ToTableauBytes(promptResponse.getImageBase64());
+    return convertirImageBase64ToTableauBytes(promptResponse.imageBase64());
   }
 
   private PromptRequest construirePromptRequest(GenerationForm generationForm) {
-    PromptRequest promptRequest = new PromptRequest();
-    promptRequest.setModel(ModelEnum.getName(generationForm.getModelEnum()));
-    promptRequest.setPrompt(construirePromptSelonGenerationForm(generationForm));
-    promptRequest.setNegativePrompt("");
-    promptRequest.setSeed("6224");
-
-    return promptRequest;
+    return new PromptRequest(
+        ModelEnum.getName(generationForm.getModelEnum()),
+        construirePromptSelonGenerationForm(generationForm),
+        "",
+        "6224");
   }
 
   private String construirePromptSelonGenerationForm(GenerationForm generationForm) {

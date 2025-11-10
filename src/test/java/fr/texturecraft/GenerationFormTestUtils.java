@@ -14,6 +14,7 @@ public class GenerationFormTestUtils {
                                                    boolean possedeSymetrie) {
     GenerationForm generationForm = new GenerationForm();
     generationForm.setModelEnum(ModelEnum.FINAL);
+    generationForm.setResolution("16x16");
 
     generationForm.setTypeObjet(typeObjet);
     generationForm.setMateriau("wood");
@@ -53,39 +54,17 @@ public class GenerationFormTestUtils {
                                                          boolean possedeOpacite,
                                                          boolean possedeVue,
                                                          boolean possedeSymetrie) {
-    GenerationFormDTO generationFormDTO = new GenerationFormDTO();
-    generationFormDTO.setModel("final");
-
-    generationFormDTO.setTypeObjet(typeObjet);
-    generationFormDTO.setMateriau("wood");
-    generationFormDTO.setNomType("nom_texture");
-    generationFormDTO.setCouleur("brown");
-    generationFormDTO.setDescription("une description");
-
-    if (possedeFond) {
-      generationFormDTO.setFond("transparent");
-    } else {
-      generationFormDTO.setFond("");
-    }
-
-    if (possedeOpacite) {
-      generationFormDTO.setOpacite("semi-transparent");
-    } else {
-      generationFormDTO.setOpacite("");
-    }
-
-    if (possedeVue) {
-      generationFormDTO.setVue("top");
-    } else {
-      generationFormDTO.setVue("");
-    }
-
-    if (possedeSymetrie) {
-      generationFormDTO.setSymetrie("radial");
-    } else {
-      generationFormDTO.setSymetrie("");
-    }
-
-    return generationFormDTO;
+    return new GenerationFormDTO(
+        "final",
+        "16x16",
+        typeObjet,
+        "wood",
+        "nom_texture",
+        "brown",
+        "une description",
+        possedeFond ? "transparent" : "",
+        possedeOpacite ? "semi-transparent": "",
+        possedeVue ? "top" : "",
+        possedeSymetrie ? "radial" : "");
   }
 }

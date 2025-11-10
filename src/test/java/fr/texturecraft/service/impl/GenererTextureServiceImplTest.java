@@ -38,9 +38,8 @@ class GenererTextureServiceImplTest {
     GenerationForm generationForm = creerGenerationForm("block", false, false,
         false,false);
 
-    PromptResponse promptResponseAttendue = new PromptResponse();
-    promptResponseAttendue.setModel("final");
-    promptResponseAttendue.setImageBase64("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0");
+    PromptResponse promptResponseAttendue =
+        new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0","final");
 
     when(generationApiPort.genererTexture(any(PromptRequest.class)))
         .thenReturn(promptResponseAttendue);
@@ -54,8 +53,8 @@ class GenererTextureServiceImplTest {
 
       PromptRequest capturedRequest = promptRequestCaptor.getValue();
 
-      assertEquals(promptResponseAttendue.getModel(), capturedRequest.getModel());
-      assertEquals(promptAttendu, capturedRequest.getPrompt());
+      assertEquals(promptResponseAttendue.model(), capturedRequest.model());
+      assertEquals(promptAttendu, capturedRequest.prompt());
     });
   }
 
@@ -68,9 +67,8 @@ class GenererTextureServiceImplTest {
     GenerationForm generationForm = creerGenerationForm("block", true, true,
         true,true);
 
-    PromptResponse promptResponseAttendue = new PromptResponse();
-    promptResponseAttendue.setModel("final");
-    promptResponseAttendue.setImageBase64("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0");
+    PromptResponse promptResponseAttendue =
+        new PromptResponse("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0", "final");
 
     when(generationApiPort.genererTexture(any(PromptRequest.class)))
         .thenReturn(promptResponseAttendue);
@@ -84,8 +82,8 @@ class GenererTextureServiceImplTest {
 
       PromptRequest capturedRequest = promptRequestCaptor.getValue();
 
-      assertEquals(promptResponseAttendue.getModel(), capturedRequest.getModel());
-      assertEquals(promptAttendu, capturedRequest.getPrompt());
+      assertEquals(promptResponseAttendue.model(), capturedRequest.model());
+      assertEquals(promptAttendu, capturedRequest.prompt());
     });
   }
 }

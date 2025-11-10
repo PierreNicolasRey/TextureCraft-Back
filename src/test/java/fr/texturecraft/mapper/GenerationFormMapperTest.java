@@ -29,11 +29,11 @@ class GenerationFormMapperTest {
     Assertions.assertAll(() -> {
       assertEquals(ModelEnum.FINAL, model.getModelEnum());
       // Tags obligatoires
-      assertEquals(dto.getTypeObjet(), model.getTypeObjet());
-      assertEquals(dto.getMateriau(), model.getMateriau());
-      assertEquals(dto.getNomType(), model.getNomType());
-      assertEquals(dto.getCouleur(), model.getCouleur());
-      assertEquals(dto.getDescription(), model.getDescription());
+      assertEquals(dto.typeObjet(), model.getTypeObjet());
+      assertEquals(dto.materiau(), model.getMateriau());
+      assertEquals(dto.nomType(), model.getNomType());
+      assertEquals(dto.couleur(), model.getCouleur());
+      assertEquals(dto.description(), model.getDescription());
 
       // Tags optionnels vides
       assertEquals("", model.getFond());
@@ -57,26 +57,36 @@ class GenerationFormMapperTest {
     Assertions.assertAll(() -> {
       assertEquals(ModelEnum.FINAL, model.getModelEnum());
       // Tags obligatoires
-      assertEquals(dto.getTypeObjet(), model.getTypeObjet());
-      assertEquals(dto.getMateriau(), model.getMateriau());
-      assertEquals(dto.getNomType(), model.getNomType());
-      assertEquals(dto.getCouleur(), model.getCouleur());
-      assertEquals(dto.getDescription(), model.getDescription());
+      assertEquals(dto.typeObjet(), model.getTypeObjet());
+      assertEquals(dto.materiau(), model.getMateriau());
+      assertEquals(dto.nomType(), model.getNomType());
+      assertEquals(dto.couleur(), model.getCouleur());
+      assertEquals(dto.description(), model.getDescription());
 
       // Tags optionnels vides
-      assertEquals(dto.getFond(), model.getFond());
-      assertEquals(dto.getOpacite(), model.getOpacite());
-      assertEquals(dto.getVue(), model.getVue());
-      assertEquals(dto.getSymetrie(), model.getSymetrie());
+      assertEquals(dto.fond(), model.getFond());
+      assertEquals(dto.opacite(), model.getOpacite());
+      assertEquals(dto.vue(), model.getVue());
+      assertEquals(dto.symetrie(), model.getSymetrie());
     });
   }
 
   @Test
   void verifierPropagationExceptionQuandMappingEchoueTest() {
     // GIVEN
-    GenerationFormDTO generationFormDTO = creerGenerationFormDTO("block", false,
-        false, false, false);
-    generationFormDTO.setModel("model_inexistant");
+    GenerationFormDTO generationFormDTO = new GenerationFormDTO(
+        "model_inexistant",
+        "16x16",
+        "block",
+        "wood",
+        "nom_texture",
+        "brown",
+        "une description",
+        "",
+        "",
+        "",
+        ""
+    );
 
     // THEN
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
