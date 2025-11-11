@@ -46,7 +46,8 @@ class GenererTextureControllerTest {
   @Test
   void verifierAppelQuandGenererTextureTest() {
     // GIVEN
-    GenerationResponseDTO generationResponseDTO = new GenerationResponseDTO(new byte[2], new byte[4]);
+    GenerationResponseDTO generationResponseDTO =
+        new GenerationResponseDTO("aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0", "aW1hZ2UgZW5jb2TDqSBlbiBiYXNlIDY0");
 
     when(generationFormMapper.mapperGenerationFormDTOToGenerationForm(generationFormDTO))
         .thenReturn(generationForm);
