@@ -9,8 +9,6 @@ import fr.texturecraft.model.GenerationForm;
 import fr.texturecraft.service.GenererTextureService;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-
 @Service
 public class GenererTextureServiceImpl implements GenererTextureService {
   private final GenerationApiPort generationApiPort;
@@ -25,8 +23,9 @@ public class GenererTextureServiceImpl implements GenererTextureService {
         generationApiPort.genererTexture(construirePromptRequest(generationForm));
 
     return new GenerationResponseDTO(
-        convertirImageBase64ToTableauBytes(promptResponse.imageBase64Cible()),
-        convertirImageBase64ToTableauBytes(promptResponse.imageBase64Affichage()));
+        promptResponse.imageBase64Cible(),
+        promptResponse.imageBase64Affichage()
+    );
   }
 
   private PromptRequest construirePromptRequest(GenerationForm generationForm) {
@@ -36,9 +35,5 @@ public class GenererTextureServiceImpl implements GenererTextureService {
         generationForm.construirePromptSelonGenerationForm(),
         "",
         "6224");
-  }
-
-  private byte[] convertirImageBase64ToTableauBytes(String base64Image) {
-    return Base64.getDecoder().decode(base64Image);
   }
 }

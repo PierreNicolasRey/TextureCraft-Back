@@ -1,4 +1,4 @@
 package fr.texturecraft.dto;
 
-public record GenerationResponseDTO(byte[] textureCible, byte[] textureAffichage) {
+public record GenerationResponseDTO(String textureCible, String textureAffichage) {
 }
