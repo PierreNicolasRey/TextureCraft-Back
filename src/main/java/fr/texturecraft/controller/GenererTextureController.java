@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/generer")
+@RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:4200")
 public class GenererTextureController {
   private final GenererTextureService genererTextureService;

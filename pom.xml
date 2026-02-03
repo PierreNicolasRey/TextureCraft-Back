@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.0-M3</version>
+        <version>4.0.2</version>
         <relativePath/>
     </parent>
     <groupId>fr.texture-craft</groupId>
     <artifactId>TextureCraft-Back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TextureCraft-Back</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Back-end application for Minecraft-like texture generation</description>
     <url/>
     <licenses>
         <license/>
@@ -28,6 +28,7 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <jackson.version>2.20.1</jackson.version>
     </properties>
     <dependencies>
         <dependency>
@@ -42,7 +43,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.20.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>

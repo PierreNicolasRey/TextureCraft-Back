@@ -14,7 +14,6 @@ public class ApiConfig {
     HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new
         HttpComponentsClientHttpRequestFactory();
     clientHttpRequestFactory.setConnectionRequestTimeout(timeout * 10);
-    clientHttpRequestFactory.setConnectTimeout(timeout * 20);
     clientHttpRequestFactory.setReadTimeout(timeout * 10000);
     return clientHttpRequestFactory;
   }
