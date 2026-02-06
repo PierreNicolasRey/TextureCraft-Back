@@ -69,3 +69,10 @@ la maintenance.
 YAGNI (You Ain't Gonna Need It) : Architecture volontairement épurée, 
 sans base de données, privilégiant la vitesse de traitement et la simplicité 
 de déploiement en local.
+
+---
+
+## Copyright
+
+© 2026 Pierre-Nicolas Rey. Tous droits réservés. Le code et les modèles présents dans ce dépôt sont mis à disposition pour consultation technique uniquement. 
+Toute reproduction ou utilisation sans autorisation préalable est interdite.
